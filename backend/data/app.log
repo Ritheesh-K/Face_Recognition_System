@@ -2993,3 +2993,88 @@
 2026-09-21 17:11:14,110 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.50
 2026-09-21 17:11:14,167 [INFO] [face_recognition.matcher]: Unknown person rejected: highest similarity score 0.1467 is below threshold 0.5000
 2026-09-21 17:13:40,752 [INFO] [face_recognition.cleanup]: Retention cleanup daemon stopped.
+2026-09-21 17:58:57,185 [INFO] [face_recognition.detector]: Initializing FaceDetector with model pack 'buffalo_sc' on CPU...
+2026-09-21 17:58:57,351 [INFO] [face_recognition.detector]: FaceDetector successfully initialized.
+2026-09-21 17:58:57,414 [INFO] [face_recognition.embedder]: FaceEmbedder successfully initialized with ArcFace ONNX model.
+2026-09-21 17:58:57,415 [INFO] [face_recognition.engine]: FaceEngine pipeline fully initialized.
+2026-09-21 18:00:25,810 [INFO] [face_recognition.detector]: Initializing FaceDetector with model pack 'buffalo_sc' on CPU...
+2026-09-21 18:00:25,986 [INFO] [face_recognition.detector]: FaceDetector successfully initialized.
+2026-09-21 18:00:26,010 [INFO] [face_recognition.embedder]: FaceEmbedder successfully initialized with ArcFace ONNX model.
+2026-09-21 18:00:26,010 [INFO] [face_recognition.engine]: FaceEngine pipeline fully initialized.
+2026-09-21 18:00:26,720 [INFO] [face_recognition.cleanup]: Retention cleanup daemon started. Interval: 86400 seconds, Retention: 30 days.
+2026-09-21 18:00:26,720 [INFO] [face_recognition.cleanup]: Retention cleanup daemon thread launched (id=25092).
+2026-09-21 18:00:26,720 [INFO] [face_recognition.cleanup]: Retention cleanup: scanning 'C:\Users\Ritheesh k\Downloads\Face_Recognition_System\Ritheesh\backend\data\thumbnails' for files older than 30 day(s).
+2026-09-21 18:00:26,732 [INFO] [face_recognition.cleanup]: Retention cleanup: finished. Deleted 0 file(s).
+2026-09-21 18:02:48,768 [INFO] [face_recognition.detector]: Initializing FaceDetector with model pack 'buffalo_sc' on CPU...
+2026-09-21 18:02:48,946 [INFO] [face_recognition.detector]: FaceDetector successfully initialized.
+2026-09-21 18:02:49,073 [INFO] [face_recognition.embedder]: FaceEmbedder successfully initialized with ArcFace ONNX model.
+2026-09-21 18:02:49,143 [INFO] [face_recognition.engine]: FaceEngine pipeline fully initialized.
+2026-09-21 18:02:49,732 [INFO] [face_recognition.cleanup]: Retention cleanup daemon started. Interval: 86400 seconds, Retention: 30 days.
+2026-09-21 18:02:49,732 [INFO] [face_recognition.cleanup]: Retention cleanup daemon thread launched (id=20752).
+2026-09-21 18:02:49,732 [INFO] [face_recognition.cleanup]: Retention cleanup: scanning 'C:\Users\Ritheesh k\Downloads\Face_Recognition_System\Ritheesh\backend\data\thumbnails' for files older than 30 day(s).
+2026-09-21 18:02:49,742 [INFO] [face_recognition.cleanup]: Retention cleanup: finished. Deleted 0 file(s).
+2026-09-21 18:03:42,012 [INFO] [face_recognition.detector]: Initializing FaceDetector with model pack 'buffalo_sc' on CPU...
+2026-09-21 18:03:42,150 [INFO] [face_recognition.detector]: FaceDetector successfully initialized.
+2026-09-21 18:03:42,197 [INFO] [face_recognition.embedder]: FaceEmbedder successfully initialized with ArcFace ONNX model.
+2026-09-21 18:03:42,288 [INFO] [face_recognition.engine]: FaceEngine pipeline fully initialized.
+2026-09-21 18:03:43,016 [INFO] [face_recognition.cleanup]: Retention cleanup daemon started. Interval: 86400 seconds, Retention: 30 days.
+2026-09-21 18:03:43,017 [INFO] [face_recognition.cleanup]: Retention cleanup: scanning 'C:\Users\Ritheesh k\Downloads\Face_Recognition_System\Ritheesh\backend\data\thumbnails' for files older than 30 day(s).
+2026-09-21 18:03:43,016 [INFO] [face_recognition.cleanup]: Retention cleanup daemon thread launched (id=28892).
+2026-09-21 18:03:43,026 [INFO] [face_recognition.cleanup]: Retention cleanup: finished. Deleted 0 file(s).
+2026-09-21 18:04:26,434 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.50
+2026-09-21 18:04:26,454 [INFO] [face_recognition.recognition_service]: Matching 1 detected face(s) against 5 enrolled template(s)...
+2026-09-21 18:04:26,472 [INFO] [face_recognition.matcher]: Identity match: 'Ritheesh K' (ID: 7) with similarity score 0.9055 >= threshold 0.5000
+2026-09-21 18:04:26,537 [INFO] [face_recognition.recognition_service]: Recognition completed in 409.41 ms. Status: KNOWN. Best similarity: 0.9055 (threshold: 0.5000)
+2026-09-21 18:05:27,919 [INFO] [face_recognition.person_service]: Deleted person ID: 7
+2026-09-21 18:05:37,872 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.45
+2026-09-21 18:05:39,026 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.45
+2026-09-21 18:05:41,232 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.45
+2026-09-21 18:05:54,404 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.45
+2026-09-21 18:05:54,909 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.45
+2026-09-21 18:05:56,240 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.45
+2026-09-21 18:05:56,568 [INFO] [face_recognition.person_service]: Enrolled person 'Ritheesh K' (Code: R1, ID: 7) with 3 images and representative template.
+2026-09-21 18:06:21,044 [INFO] [face_recognition.person_service]: Deleted person ID: 7
+2026-09-21 18:06:32,104 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.45
+2026-09-21 18:06:33,391 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.45
+2026-09-21 18:06:34,905 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.45
+2026-09-21 18:07:14,910 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.45
+2026-09-21 18:07:15,265 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.45
+2026-09-21 18:07:16,796 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.45
+2026-09-21 18:07:17,422 [INFO] [face_recognition.person_service]: Enrolled person 'Ritheesh K' (Code: R1, ID: 7) with 3 images and representative template.
+2026-09-21 18:39:42,782 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.50
+2026-09-21 18:39:42,800 [INFO] [face_recognition.matcher]: Unknown person rejected: highest similarity score 0.0153 is below threshold 0.5000
+2026-09-21 18:39:45,138 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.50
+2026-09-21 18:39:45,163 [INFO] [face_recognition.matcher]: Unknown person rejected: highest similarity score 0.0183 is below threshold 0.5000
+2026-09-21 18:39:45,280 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.50
+2026-09-21 18:39:45,317 [INFO] [face_recognition.matcher]: Unknown person rejected: highest similarity score 0.0949 is below threshold 0.5000
+2026-09-21 18:39:45,452 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.50
+2026-09-21 18:39:45,490 [INFO] [face_recognition.matcher]: Unknown person rejected: highest similarity score 0.0945 is below threshold 0.5000
+2026-09-21 18:39:45,693 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.50
+2026-09-21 18:39:45,721 [INFO] [face_recognition.matcher]: Unknown person rejected: highest similarity score 0.1288 is below threshold 0.5000
+2026-09-21 18:39:45,846 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.50
+2026-09-21 18:39:45,891 [INFO] [face_recognition.matcher]: Unknown person rejected: highest similarity score 0.1311 is below threshold 0.5000
+2026-09-21 18:39:46,001 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.50
+2026-09-21 18:39:46,051 [INFO] [face_recognition.matcher]: Unknown person rejected: highest similarity score 0.1348 is below threshold 0.5000
+2026-09-21 18:39:46,248 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.50
+2026-09-21 18:39:46,286 [INFO] [face_recognition.matcher]: Unknown person rejected: highest similarity score 0.1414 is below threshold 0.5000
+2026-09-21 18:39:46,430 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.50
+2026-09-21 18:39:46,472 [INFO] [face_recognition.matcher]: Unknown person rejected: highest similarity score 0.1377 is below threshold 0.5000
+2026-09-21 18:39:46,820 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.50
+2026-09-21 18:39:46,855 [INFO] [face_recognition.matcher]: Unknown person rejected: highest similarity score 0.0153 is below threshold 0.5000
+2026-09-21 18:39:46,957 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.50
+2026-09-21 18:39:46,996 [INFO] [face_recognition.matcher]: Unknown person rejected: highest similarity score 0.0183 is below threshold 0.5000
+2026-09-21 18:39:47,117 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.50
+2026-09-21 18:39:47,146 [INFO] [face_recognition.matcher]: Unknown person rejected: highest similarity score 0.0949 is below threshold 0.5000
+2026-09-21 18:39:47,239 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.50
+2026-09-21 18:39:47,277 [INFO] [face_recognition.matcher]: Unknown person rejected: highest similarity score 0.0945 is below threshold 0.5000
+2026-09-21 18:39:47,384 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.50
+2026-09-21 18:39:47,413 [INFO] [face_recognition.matcher]: Unknown person rejected: highest similarity score 0.1288 is below threshold 0.5000
+2026-09-21 18:39:47,543 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.50
+2026-09-21 18:39:47,578 [INFO] [face_recognition.matcher]: Unknown person rejected: highest similarity score 0.1311 is below threshold 0.5000
+2026-09-21 18:39:47,711 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.50
+2026-09-21 18:39:47,750 [INFO] [face_recognition.matcher]: Unknown person rejected: highest similarity score 0.1348 is below threshold 0.5000
+2026-09-21 18:39:47,881 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.50
+2026-09-21 18:39:47,917 [INFO] [face_recognition.matcher]: Unknown person rejected: highest similarity score 0.1414 is below threshold 0.5000
+2026-09-21 18:39:48,064 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.50
+2026-09-21 18:39:48,099 [INFO] [face_recognition.matcher]: Unknown person rejected: highest similarity score 0.1377 is below threshold 0.5000
+2026-09-21 18:45:13,516 [INFO] [face_recognition.cleanup]: Retention cleanup daemon stopped.

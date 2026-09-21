@@ -4,6 +4,9 @@
 
 A high-performance, privacy-conscious, and fully local 1:N open-set face identification and biometric evaluation system. Built with **InsightFace**, **SCRFD Face Detection**, **ArcFace 512-Dimensional Deep Embeddings**, **Canonical 5-Point Affine Alignment**, **Vectorized Cosine Similarity Matching**, **Strict Unknown-Person Rejection**, and an interactive **Biometric Evaluation & Threshold Calibration Studio**.
 
+![Face Recognition Dashboard](docs/screenshots/01_dashboard.png)
+*Figure 1: Production System Dashboard featuring real-time telemetry, model status, 512D ArcFace embeddings count, pipeline tracking, and live audit feed.*
+
 ---
 
 # 2. Problem Statement
@@ -164,6 +167,9 @@ System operating threshold: $\tau = \mathbf{0.50}$
 - **Strict Invariant Guarantee**: The system **rejects** the match despite Carol Sharma scoring highest.
 - **Result**: `status = "UNKNOWN"`, `person_id = null`, `name = "UNKNOWN"`, `margin = +0.2263`.
 
+![1:N Face Recognition & Unknown Rejection](docs/screenshots/02_recognition.png)
+*Figure 2: 1:N Face Recognition interface showing query dropzone, live webcam trigger, and dynamic threshold slider with Convenience (0.38), Balanced (0.50), and High Security (0.65) presets.*
+
 ---
 
 # 9. Dataset
@@ -174,6 +180,12 @@ System operating threshold: $\tau = \mathbf{0.50}$
   - **Alice Johnson** (`person1`): 3 enrolled face images $\to$ 1 canonical template centroid.
   - **Bob Lee** (`person2`): 3 enrolled face images $\to$ 1 canonical template centroid.
   - **Carol Sharma** (`person3`): 3 enrolled face images $\to$ 1 canonical template centroid.
+
+![Multi-Image Enrollment Form](docs/screenshots/03_enrollment.png)
+*Figure 3: Multi-image identity enrollment interface enforcing minimum 3 face samples, single-face validation constraint, and metadata capture.*
+
+![Enrolled Persons Gallery Database](docs/screenshots/04_persons_database.png)
+*Figure 4: Enrolled Persons Gallery database displaying registered identities, facial avatars, sample image counts, and template management.*
 
 ### Evaluation Validation Dataset
 Located in `evaluation/`:
@@ -236,6 +248,9 @@ evaluation/
 - **Equal Error Rate (EER)**: $0.0000$ at $\tau \in [0.40, 0.70]$
 - **Area Under ROC Curve (AUC)**: $1.0000$
 - **Clear Decoupling Margin**: Over $+0.717$ separation between highest impostor score ($0.2737$) and lowest genuine score ($0.9908$).
+
+![Biometric Evaluation & Threshold Calibration Studio](docs/screenshots/05_evaluation_studio.png)
+*Figure 5: Biometric Evaluation & Threshold Calibration Studio displaying empirical validation benchmark execution, sensitivity slider, and FAR/FRR trade-off analysis.*
 
 ---
 
@@ -422,12 +437,20 @@ Ritheesh/
 │       │   └── SettingsPage.jsx    # System preferences & privacy policy
 │       └── services/
 │           └── api.js              # Axios HTTP client
-└── docs/                           # Extended technical reports
+└── docs/                           # Extended technical reports & UI captures
     ├── ASSIGNMENT_REPORT.md
     ├── FAILURE_CASES.md
     ├── FUTURE_IMPROVEMENTS.md
     ├── MODEL_DETAILS.md
-    └── THRESHOLD_ANALYSIS.md
+    ├── THRESHOLD_ANALYSIS.md
+    └── screenshots/                # Application UI & evaluation screenshots
+        ├── 01_dashboard.png
+        ├── 02_recognition.png
+        ├── 03_enrollment.png
+        ├── 04_persons_database.png
+        ├── 05_evaluation_studio.png
+        ├── 06_audit_history.png
+        └── 07_settings.png
 ```
 
 ---
@@ -466,3 +489,9 @@ Biometric face data constitutes sensitive personal information that requires rig
 3. **Automated Image Retention Purge**: Temporary probe crops created during recognition attempts are automatically purged by the background `cleanup_service` daemon after a configurable retention window (default 30 days).
 4. **Local Data Sovereignty**: All processing occurs 100% locally on the host machine. Zero facial data or biometric descriptors are transmitted to external third-party servers or cloud vendors.
 5. **Academic & Authorized Purpose**: This system is developed for educational and authorized operational verification. Deployments in public spaces must comply with applicable data protection regulations (such as GDPR or local biometric privacy laws), including clear user consent, visible signage, and robust data minimization protocols.
+
+![Recognition Audit Trail](docs/screenshots/06_audit_history.png)
+*Figure 6: Paginated Recognition Audit Trail detailing probe face crops, timestamps, matched names, cosine similarity scores, threshold comparisons, and privacy-compliant retention.*
+
+![System Configuration & Model Diagnostics](docs/screenshots/07_settings.png)
+*Figure 7: System Configuration and ML Diagnostics displaying operating security presets (High Security, Balanced, Convenience), detection confidence, and local ONNX Runtime telemetry.*

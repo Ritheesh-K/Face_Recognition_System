@@ -195,7 +195,7 @@ export default function App() {
               <span>•</span>
               <span>ONNX Runtime CPU</span>
               <span>•</span>
-              <button 
+              <button
                 onClick={() => setActiveTab('docs')}
                 className="text-cyan-500/80 hover:text-cyan-400 transition-colors"
               >
