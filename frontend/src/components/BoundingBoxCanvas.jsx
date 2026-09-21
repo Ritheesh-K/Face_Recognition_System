@@ -120,7 +120,7 @@ export default function BoundingBoxCanvas({
                   </span>
                 </div>
                 <div className="text-[10px] font-mono opacity-90 pl-5">
-                  Similarity: {simVal}
+                  {(res.person_code || res.code) ? `ID: ${res.person_code || res.code} • ` : ''}Similarity: {simVal}
                 </div>
               </div>
             </div>

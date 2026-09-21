@@ -21,6 +21,7 @@ class RecognitionMatch(BaseModel):
     bbox: BoundingBox
     status: str = Field(..., description="'MATCH' or 'UNKNOWN'")
     person_id: Optional[int] = None
+    person_code: Optional[str] = None
     name: str = Field(..., description="Matched name or 'UNKNOWN'")
     department: Optional[str] = None
     similarity_score: float

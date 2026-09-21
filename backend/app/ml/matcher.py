@@ -139,6 +139,8 @@ class FaceMatcher:
                     "person_id": pid,
                     "person_name": name,
                     "name": name,
+                    "person_code": item.get("code"),
+                    "code": item.get("code"),
                     "department": item.get("department"),
                     "similarity": sim,
                     "score": sim
@@ -161,6 +163,8 @@ class FaceMatcher:
             )
             return {
                 "person_id": top_candidate["person_id"],
+                "person_code": top_candidate.get("person_code"),
+                "code": top_candidate.get("code"),
                 "person_name": top_candidate["person_name"],
                 "name": top_candidate["person_name"],
                 "department": top_candidate.get("department"),
@@ -175,6 +179,7 @@ class FaceMatcher:
                 "candidate_ranking": [
                     {
                         "person_id": c["person_id"],
+                        "person_code": c.get("person_code"),
                         "person_name": c["person_name"],
                         "name": c["person_name"],
                         "similarity": round(c["similarity"], 4)

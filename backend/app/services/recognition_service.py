@@ -176,6 +176,7 @@ class RecognitionService:
                     bbox=bbox_obj,
                     status=match_res["status"],
                     person_id=match_res["person_id"],
+                    person_code=match_res.get("person_code"),
                     name=match_res["person_name"],
                     department=match_res.get("department"),
                     similarity_score=match_res["similarity"],
@@ -197,6 +198,7 @@ class RecognitionService:
             matched_person = MatchedPersonSummary(
                 id=best_match.person_id,
                 name=best_match.name,
+                code=best_match.person_code,
                 department=best_match.department
             )
             final_similarity = round(best_match.similarity_score, 4)

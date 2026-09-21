@@ -33,6 +33,15 @@ export default function RecognitionPage({ systemSettings, onRecognitionComplete,
 
   const fileInputRef = useRef(null);
 
+  const handleModeChange = (newMode) => {
+    setMode(newMode);
+    setSelectedFile(null);
+    setPreviewUrl(null);
+    setResultData(null);
+    setErrorMsg(null);
+    setSelectedFaceIdx(0);
+  };
+
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -76,7 +85,9 @@ export default function RecognitionPage({ systemSettings, onRecognitionComplete,
     try {
       const data = await recognizeFace(formData);
       setResultData(data);
-      setSelectedFaceIdx(0);
+      // Auto-select the first recognized (KNOWN/MATCH) face if available, otherwise default to face 0
+      const matchedIdx = data.results?.findIndex(r => r.status === 'MATCH' || r.status === 'KNOWN');
+      setSelectedFaceIdx(matchedIdx >= 0 ? matchedIdx : 0);
       if (onRecognitionComplete) {
         onRecognitionComplete();
       }
@@ -112,7 +123,7 @@ export default function RecognitionPage({ systemSettings, onRecognitionComplete,
         <div className="inline-flex bg-slate-900 p-1.5 rounded-2xl border border-slate-800 self-start sm:self-auto">
           <button
             id="tab-mode-upload"
-            onClick={() => setMode('upload')}
+            onClick={() => handleModeChange('upload')}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${
               mode === 'upload'
                 ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 shadow-md shadow-cyan-500/20'
@@ -124,7 +135,7 @@ export default function RecognitionPage({ systemSettings, onRecognitionComplete,
           </button>
           <button
             id="tab-mode-webcam"
-            onClick={() => setMode('webcam')}
+            onClick={() => handleModeChange('webcam')}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${
               mode === 'webcam'
                 ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 shadow-md shadow-cyan-500/20'
@@ -167,7 +178,46 @@ export default function RecognitionPage({ systemSettings, onRecognitionComplete,
         {/* Left Column: Image Source / Canvas (7 cols) */}
         <div className="lg:col-span-7 space-y-6">
           {mode === 'webcam' ? (
-            <WebcamCapture onCapture={handleWebcamCapture} isProcessing={loading} />
+            previewUrl ? (
+              <div className="space-y-4">
+                <BoundingBoxCanvas
+                  imageUrl={previewUrl}
+                  results={resultData?.results || []}
+                  onSelectFace={(idx) => setSelectedFaceIdx(idx)}
+                  selectedFaceIndex={selectedFaceIdx}
+                />
+
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <button
+                    id="btn-retake-webcam"
+                    onClick={() => {
+                      setPreviewUrl(null);
+                      setResultData(null);
+                      setErrorMsg(null);
+                      setSelectedFile(null);
+                    }}
+                    className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-cyan-400 rounded-xl text-xs font-bold border border-cyan-500/30 transition-colors flex items-center gap-2 shadow-md"
+                  >
+                    <Camera className="w-3.5 h-3.5" />
+                    <span>Retake / Live Camera</span>
+                  </button>
+
+                  {selectedFile && (
+                    <button
+                      id="btn-rescan-webcam"
+                      onClick={() => runRecognition(selectedFile, previewUrl)}
+                      disabled={loading}
+                      className="px-4 py-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 rounded-xl text-xs font-bold transition-colors disabled:opacity-50 flex items-center gap-2 shadow-md shadow-cyan-500/20"
+                    >
+                      <Scan className="w-3.5 h-3.5" />
+                      <span>{loading ? 'Scanning...' : 'Re-run Scan (Current τ)'}</span>
+                    </button>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <WebcamCapture onCapture={handleWebcamCapture} isProcessing={loading} />
+            )
           ) : (
             <div>
               {previewUrl ? (
@@ -354,6 +404,11 @@ export default function RecognitionPage({ systemSettings, onRecognitionComplete,
                           <div className="font-medium text-slate-300 truncate">
                             {res.name || 'UNKNOWN'}
                           </div>
+                          {(res.person_code || res.code) && (
+                            <div className="text-[10px] font-mono text-cyan-400/90 truncate font-semibold">
+                              ID: {res.person_code || res.code}
+                            </div>
+                          )}
                           <div className="text-[11px] font-mono text-slate-400 mt-0.5">
                             Similarity: {res.similarity_score.toFixed(2)}
                           </div>
@@ -391,12 +446,17 @@ export default function RecognitionPage({ systemSettings, onRecognitionComplete,
                         <h3 className="text-2xl font-black text-white mt-0.5">
                           {isMatch ? selectedFace.name : 'Unknown Identity'}
                         </h3>
+                        {isMatch && (selectedFace.person_code || selectedFace.code) && (
+                          <div className="text-xs font-mono text-cyan-300 font-bold mt-0.5">
+                            ID: {selectedFace.person_code || selectedFace.code}
+                          </div>
+                        )}
                       </div>
                     </div>
 
                     <div className="text-right font-mono">
                       <span className="text-[10px] text-slate-500 block">FACE</span>
-                      <span className="text-sm font-bold text-slate-300">#{selectedFaceIdx + 1} of {totalFaces}</span>
+                      <span className="text-sm font-bold text-slate-300">Face #{selectedFaceIdx + 1} of {totalFaces}</span>
                     </div>
                   </div>
 
@@ -408,6 +468,18 @@ export default function RecognitionPage({ systemSettings, onRecognitionComplete,
                           <span className="text-slate-400">Name:</span>
                           <span className="font-extrabold text-white text-base font-sans">{selectedFace.name}</span>
                         </div>
+                        {(selectedFace.person_code || selectedFace.code) && (
+                          <div className="flex justify-between items-center text-sm">
+                            <span className="text-slate-400">Person ID / Code:</span>
+                            <span className="font-mono font-bold text-cyan-300 text-sm">{selectedFace.person_code || selectedFace.code}</span>
+                          </div>
+                        )}
+                        {selectedFace.department && (
+                          <div className="flex justify-between items-center text-sm">
+                            <span className="text-slate-400">Department:</span>
+                            <span className="font-semibold text-slate-200 text-sm">{selectedFace.department}</span>
+                          </div>
+                        )}
                         <div className="flex justify-between items-center text-sm">
                           <span className="text-slate-400">Similarity:</span>
                           <span className="font-extrabold text-emerald-400 text-base">{selectedFace.similarity_score.toFixed(2)}</span>

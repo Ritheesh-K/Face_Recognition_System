@@ -114,12 +114,13 @@ class PersonService:
         # Check for extremely dark image
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         mean_brightness = float(np.mean(gray))
-        if mean_brightness < 25.0:
+        if mean_brightness < 18.0:
             raise ValueError("The uploaded image is too dark. Please use better lighting.")
 
         # Check for blurry image (Laplacian variance)
+        # Threshold relaxed from 20.0 to 7.0 to accommodate WhatsApp compression, portrait selfies, and soft ambient lighting
         laplacian_var = float(cv2.Laplacian(gray, cv2.CV_64F).var())
-        if laplacian_var < 20.0:
+        if laplacian_var < 7.0:
             raise ValueError("The image appears blurry. Please upload a sharp, focused face photo.")
 
         return img, ext or ".jpg"
@@ -495,7 +496,8 @@ class PersonService:
                 return {
                     "valid": False,
                     "message": f"Photo #{idx+1} ('{filename}') failed validation: {str(e)}",
-                    "mismatched_indices": [idx],
+                    "mismatched_indices": [],
+                    "invalid_indices": [idx],
                     "duplicate_indices": [],
                     "photo_details": [
                         {
@@ -545,6 +547,7 @@ class PersonService:
             "message": final_message,
             "mismatched_indices": consistency["mismatched_indices"],
             "mismatched_filenames": consistency["mismatched_filenames"],
+            "invalid_indices": [],
             "duplicate_indices": dup_indices,
             "duplicate_filenames": consistency["duplicate_filenames"],
             "already_enrolled_collision": collision if has_collision else None,

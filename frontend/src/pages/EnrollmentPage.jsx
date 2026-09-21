@@ -493,7 +493,7 @@ export default function EnrollmentPage({ onEnrollmentChange, onNavigate }) {
             )}
 
             {/* Identity Mismatch Warning Banner */}
-            {(!verificationResult?.duplicate_indices || verificationResult?.duplicate_indices?.length === 0) && !verificationResult?.already_enrolled_collision?.has_collision && verificationResult && !verificationResult.valid && !verifyingPhotos && (
+            {verificationResult?.mismatched_indices?.length > 0 && !verificationResult?.already_enrolled_collision?.has_collision && !verifyingPhotos && (
               <div className="p-4 rounded-2xl bg-rose-950/50 border-2 border-rose-600/80 shadow-xl shadow-rose-950/50 text-rose-200 text-xs space-y-2">
                 <div className="flex items-start gap-2.5">
                   <AlertTriangle className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
@@ -503,7 +503,25 @@ export default function EnrollmentPage({ onEnrollmentChange, onNavigate }) {
                       {verificationResult.message}
                     </p>
                     <p className="text-[11px] text-rose-300/90 mt-1.5 font-medium">
-                      ⚠️ Enrollment is blocked until all photos match. Click the red <strong>✕</strong> on the highlighted photo to remove it and upload a matching photo.
+                      ⚠️ Enrollment is blocked until all photos match. Click the red <strong>✕</strong> on the highlighted photo to remove it and upload a matching photo of the same person.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Photo Quality / Validation Error Banner */}
+            {(verificationResult?.invalid_indices?.length > 0 || (verificationResult && !verificationResult.valid && !verificationResult.mismatched_indices?.length && !verificationResult.duplicate_indices?.length && !verificationResult.already_enrolled_collision?.has_collision)) && !verifyingPhotos && (
+              <div className="p-4 rounded-2xl bg-rose-950/50 border-2 border-rose-600/80 shadow-xl shadow-rose-950/50 text-rose-200 text-xs space-y-2">
+                <div className="flex items-start gap-2.5">
+                  <AlertCircle className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
+                  <div>
+                    <h4 className="font-bold text-rose-300 text-sm">Photo Quality Issue Detected</h4>
+                    <p className="text-rose-200 mt-1 leading-relaxed">
+                      {verificationResult.message}
+                    </p>
+                    <p className="text-[11px] text-rose-300/90 mt-1.5 font-medium">
+                      ⚠️ Click the red <strong>✕</strong> on the highlighted photo to remove it and upload a clearer, well-lit face photo.
                     </p>
                   </div>
                 </div>
@@ -530,6 +548,7 @@ export default function EnrollmentPage({ onEnrollmentChange, onNavigate }) {
                     const isAlreadyEnrolled = verificationResult?.already_enrolled_collision?.has_collision;
                     const isDuplicate = verificationResult?.duplicate_indices?.includes(idx);
                     const isMismatched = verificationResult?.mismatched_indices?.includes(idx);
+                    const isInvalid = verificationResult?.invalid_indices?.includes(idx) || (verificationResult?.photo_details?.[idx]?.status === 'ERROR');
                     const isVerifiedValid = verificationResult?.valid;
 
                     return (
@@ -544,6 +563,8 @@ export default function EnrollmentPage({ onEnrollmentChange, onNavigate }) {
                             ? 'border-2 border-amber-500 shadow-amber-950/80 ring-2 ring-amber-500/50 bg-amber-950/20'
                             : isMismatched 
                             ? 'border-2 border-rose-500 shadow-rose-950/80 ring-2 ring-rose-500/50 bg-rose-950/20' 
+                            : isInvalid
+                            ? 'border-2 border-rose-500 shadow-rose-950/80 ring-2 ring-rose-500/50 bg-rose-950/20'
                             : isVerifiedValid 
                             ? 'border-2 border-emerald-500/80 shadow-emerald-950/40' 
                             : 'border border-slate-800 bg-slate-950 hover:border-cyan-500/60'
@@ -585,7 +606,13 @@ export default function EnrollmentPage({ onEnrollmentChange, onNavigate }) {
                             <span className="truncate">Different Person</span>
                           </div>
                         )}
-                        {isVerifiedValid && !isMismatched && !isDuplicate && !isAlreadyEnrolled && (
+                        {isInvalid && !isMismatched && !isDuplicate && !isAlreadyEnrolled && (
+                          <div className="absolute bottom-2 left-2 right-2 px-1.5 py-1 rounded-lg bg-rose-900/95 border border-rose-600 text-rose-100 text-[10px] font-bold text-center flex items-center justify-center gap-1 shadow-lg z-10">
+                            <AlertCircle className="w-3 h-3 text-rose-300 shrink-0" />
+                            <span className="truncate">Quality Issue</span>
+                          </div>
+                        )}
+                        {isVerifiedValid && !isMismatched && !isDuplicate && !isAlreadyEnrolled && !isInvalid && (
                           <div className="absolute bottom-2 left-2 right-2 px-1.5 py-0.5 rounded-lg bg-emerald-900/90 border border-emerald-600 text-emerald-100 text-[10px] font-bold text-center flex items-center justify-center gap-1 shadow-md z-10">
                             <CheckCircle2 className="w-3 h-3 text-emerald-300 shrink-0" />
                             <span>Matched</span>
@@ -672,10 +699,15 @@ export default function EnrollmentPage({ onEnrollmentChange, onNavigate }) {
                     <Copy className="w-4 h-4 text-amber-400" />
                     <span>Resolve Duplicate Photos to Enroll</span>
                   </>
-                ) : verificationResult && !verificationResult.valid ? (
+                ) : verificationResult?.mismatched_indices?.length > 0 ? (
                   <>
                     <AlertTriangle className="w-4 h-4 text-rose-400" />
                     <span>Resolve Photo Mismatches to Enroll</span>
+                  </>
+                ) : verificationResult && !verificationResult.valid ? (
+                  <>
+                    <AlertCircle className="w-4 h-4 text-rose-400" />
+                    <span>Replace Invalid Photo to Enroll</span>
                   </>
                 ) : (
                   <>
@@ -726,6 +758,10 @@ export default function EnrollmentPage({ onEnrollmentChange, onNavigate }) {
                 ) : verificationResult?.mismatched_indices?.includes(activePreviewIndex) ? (
                   <span className="px-2 py-0.5 rounded-md bg-rose-950 border border-rose-600 text-rose-300 text-xs font-bold flex items-center gap-1">
                     <AlertTriangle className="w-3.5 h-3.5 text-rose-400" /> Different Person
+                  </span>
+                ) : (verificationResult?.invalid_indices?.includes(activePreviewIndex) || verificationResult?.photo_details?.[activePreviewIndex]?.status === 'ERROR') ? (
+                  <span className="px-2 py-0.5 rounded-md bg-rose-950 border border-rose-600 text-rose-300 text-xs font-bold flex items-center gap-1">
+                    <AlertCircle className="w-3.5 h-3.5 text-rose-400" /> Quality Issue
                   </span>
                 ) : verificationResult?.valid ? (
                   <span className="px-2 py-0.5 rounded-md bg-emerald-950 border border-emerald-600 text-emerald-300 text-xs font-bold flex items-center gap-1">
