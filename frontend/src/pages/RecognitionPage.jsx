@@ -256,21 +256,53 @@ export default function RecognitionPage({ systemSettings, onRecognitionComplete,
                   id="dropzone-recognize"
                   onDragOver={(e) => e.preventDefault()}
                   onDrop={handleDrop}
-                  onClick={() => fileInputRef.current?.click()}
-                  className="border-2 border-dashed border-slate-800 hover:border-cyan-500/60 rounded-3xl p-12 text-center cursor-pointer transition-all duration-200 bg-slate-900/30 hover:bg-slate-900/50 flex flex-col items-center justify-center min-h-[380px]"
+                  onClick={(e) => {
+                    if (e.target.closest('button')) return;
+                    fileInputRef.current?.click();
+                  }}
+                  className="border-2 border-dashed border-slate-800 hover:border-cyan-500/50 rounded-3xl p-8 sm:p-12 text-center transition-all duration-200 bg-slate-900/30 hover:bg-slate-900/50 flex flex-col items-center justify-center min-h-[380px] space-y-6 cursor-pointer"
                 >
-                  <div className="w-16 h-16 rounded-2xl bg-cyan-950/60 text-cyan-400 border border-cyan-800/50 flex items-center justify-center mb-4 shadow-xl shadow-cyan-950/50">
-                    <Upload className="w-8 h-8" />
+                  <div className="space-y-1.5 max-w-md">
+                    <h3 className="text-lg font-extrabold text-white tracking-tight">
+                      Upload Your Photo or Use Live Webcam
+                    </h3>
+                    <p className="text-xs text-slate-400 leading-relaxed">
+                      Drag & drop any face image here, browse from your device, or open your camera to detect and identify faces in real time.
+                    </p>
                   </div>
-                  <h3 className="text-base font-bold text-white mb-1">
-                    Drag & Drop face image here
-                  </h3>
-                  <p className="text-xs text-slate-400 max-w-sm mb-4">
-                    Supports single or multiple faces. Every face is detected, aligned, bounded, and identified.
-                  </p>
-                  <span className="px-4 py-2 rounded-xl bg-slate-800 text-xs font-semibold text-slate-200 border border-slate-700">
-                    Browse Local File
-                  </span>
+
+                  {/* Dual Action Buttons */}
+                  <div className="flex flex-wrap items-center justify-center gap-3.5 pt-2">
+                    <button
+                      type="button"
+                      id="btn-box-upload"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        fileInputRef.current?.click();
+                      }}
+                      className="flex items-center gap-2.5 px-5 py-3 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-extrabold text-xs shadow-lg shadow-cyan-500/25 transition-all hover:scale-105 cursor-pointer"
+                    >
+                      <Upload className="w-4 h-4" />
+                      <span>Upload Your Photo</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      id="btn-box-webcam"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleModeChange('webcam');
+                      }}
+                      className="flex items-center gap-2.5 px-5 py-3 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-bold text-xs transition-all hover:scale-105 hover:border-cyan-500/40 cursor-pointer shadow-md"
+                    >
+                      <Camera className="w-4 h-4 text-cyan-400" />
+                      <span>Use Live Webcam</span>
+                    </button>
+                  </div>
+
+                  <div className="text-[11px] text-slate-500 font-mono pt-1">
+                    Supports JPG, PNG, WEBP • Single or group photos
+                  </div>
                 </div>
               )}
 
