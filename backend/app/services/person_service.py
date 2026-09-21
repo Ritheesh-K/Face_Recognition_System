@@ -239,10 +239,11 @@ class PersonService:
                 if byte_hashes[i] == byte_hashes[j]:
                     is_dup = True
                 else:
-                    # Near-identical pixel check & embedding equivalence
+                    # Near-identical pixel check & angle variation check
                     pixel_diff = float(np.mean(np.abs(tiny_grays[i] - tiny_grays[j])))
                     emb_sim = matrix[i][j]
-                    if pixel_diff < 1.5 or emb_sim > 0.9990:
+                    # Flag identical files, identical embeddings, or same-angle burst frames
+                    if pixel_diff < 1.5 or emb_sim > 0.9950 or (emb_sim >= 0.975 and pixel_diff < 8.0):
                         is_dup = True
 
                 if is_dup:
@@ -283,9 +284,9 @@ class PersonService:
             ]
             pairs_text = "; ".join(pair_strs)
             error_message = (
-                f"Duplicate photo detected: {pairs_text} are the same or nearly identical image. "
-                "Enrollment requires at least 3 distinct face photographs from different angles or lighting conditions to create a reliable biometric template. "
-                "Please replace the duplicate photo with a different shot."
+                f"Duplicate or identical angle detected: {pairs_text} are from the exact same angle. "
+                "Enrollment requires distinct face photographs from different angles (such as looking straight, turning slightly left, or turning slightly right) to create a reliable biometric template. "
+                "Please turn or tilt your head slightly for a different angle."
             )
 
         # If every photo failed (all completely different people)
