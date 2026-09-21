@@ -3078,3 +3078,86 @@
 2026-09-21 18:39:48,064 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.50
 2026-09-21 18:39:48,099 [INFO] [face_recognition.matcher]: Unknown person rejected: highest similarity score 0.1377 is below threshold 0.5000
 2026-09-21 18:45:13,516 [INFO] [face_recognition.cleanup]: Retention cleanup daemon stopped.
+2026-09-21 19:04:03,292 [INFO] [face_recognition.detector]: Initializing FaceDetector with model pack 'buffalo_sc' on CPU...
+2026-09-21 19:04:03,522 [INFO] [face_recognition.detector]: FaceDetector successfully initialized.
+2026-09-21 19:04:03,680 [INFO] [face_recognition.embedder]: FaceEmbedder successfully initialized with ArcFace ONNX model.
+2026-09-21 19:04:03,807 [INFO] [face_recognition.engine]: FaceEngine pipeline fully initialized.
+2026-09-21 19:04:04,346 [INFO] [face_recognition.cleanup]: Retention cleanup daemon started. Interval: 86400 seconds, Retention: 30 days.
+2026-09-21 19:04:04,346 [INFO] [face_recognition.cleanup]: Retention cleanup daemon thread launched (id=472).
+2026-09-21 19:04:04,347 [INFO] [face_recognition.cleanup]: Retention cleanup: scanning 'C:\Users\Ritheesh k\Downloads\Face_Recognition_System\Ritheesh\backend\data\thumbnails' for files older than 30 day(s).
+2026-09-21 19:04:04,357 [INFO] [face_recognition.cleanup]: Retention cleanup: finished. Deleted 0 file(s).
+2026-09-21 19:04:53,614 [INFO] [face_recognition.detector]: Detected 9 face(s) with confidence >= 0.50
+2026-09-21 19:04:53,683 [INFO] [face_recognition.recognition_service]: Matching 9 detected face(s) against 5 enrolled template(s)...
+2026-09-21 19:04:53,749 [INFO] [face_recognition.matcher]: Identity match: 'appu' (ID: 3) with similarity score 0.6080 >= threshold 0.5000
+2026-09-21 19:04:53,889 [INFO] [face_recognition.matcher]: Identity match: 'appu' (ID: 3) with similarity score 0.6915 >= threshold 0.5000
+2026-09-21 19:04:53,957 [INFO] [face_recognition.matcher]: Identity match: 'appu' (ID: 3) with similarity score 0.6483 >= threshold 0.5000
+2026-09-21 19:04:53,988 [INFO] [face_recognition.matcher]: Identity match: 'appu' (ID: 3) with similarity score 0.7738 >= threshold 0.5000
+2026-09-21 19:04:54,015 [INFO] [face_recognition.matcher]: Identity match: 'appu' (ID: 3) with similarity score 0.6693 >= threshold 0.5000
+2026-09-21 19:04:54,063 [INFO] [face_recognition.matcher]: Identity match: 'appu' (ID: 3) with similarity score 0.6687 >= threshold 0.5000
+2026-09-21 19:04:54,150 [INFO] [face_recognition.matcher]: Identity match: 'appu' (ID: 3) with similarity score 0.5481 >= threshold 0.5000
+2026-09-21 19:04:54,261 [INFO] [face_recognition.matcher]: Unknown person rejected: highest similarity score 0.4462 is below threshold 0.5000
+2026-09-21 19:04:54,348 [INFO] [face_recognition.matcher]: Identity match: 'appu' (ID: 3) with similarity score 0.7283 >= threshold 0.5000
+2026-09-21 19:04:54,410 [INFO] [face_recognition.recognition_service]: Recognition completed in 3178.38 ms. Status: KNOWN. Best similarity: 0.7738 (threshold: 0.5000)
+2026-09-21 19:05:14,147 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.45
+2026-09-21 19:05:15,375 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.45
+2026-09-21 19:05:16,600 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.45
+2026-09-21 19:21:38,292 [INFO] [face_recognition.detector]: Detected 2 face(s) with confidence >= 0.50
+2026-09-21 19:21:38,302 [INFO] [face_recognition.recognition_service]: Matching 2 detected face(s) against 5 enrolled template(s)...
+2026-09-21 19:21:38,316 [INFO] [face_recognition.matcher]: Identity match: 'Ritheesh K' (ID: 7) with similarity score 0.5938 >= threshold 0.5000
+2026-09-21 19:21:38,339 [INFO] [face_recognition.matcher]: Unknown person rejected: highest similarity score 0.1237 is below threshold 0.5000
+2026-09-21 19:21:38,381 [INFO] [face_recognition.recognition_service]: Recognition completed in 384.52 ms. Status: KNOWN. Best similarity: 0.5938 (threshold: 0.5000)
+2026-09-21 19:21:45,726 [INFO] [face_recognition.detector]: Detected 2 face(s) with confidence >= 0.50
+2026-09-21 19:21:45,737 [INFO] [face_recognition.recognition_service]: Matching 2 detected face(s) against 5 enrolled template(s)...
+2026-09-21 19:21:45,750 [INFO] [face_recognition.matcher]: Identity match: 'Ritheesh K' (ID: 7) with similarity score 0.5938 >= threshold 0.5000
+2026-09-21 19:21:45,776 [INFO] [face_recognition.matcher]: Unknown person rejected: highest similarity score 0.1237 is below threshold 0.5000
+2026-09-21 19:21:45,810 [INFO] [face_recognition.recognition_service]: Recognition completed in 375.92 ms. Status: KNOWN. Best similarity: 0.5938 (threshold: 0.5000)
+2026-09-21 19:21:57,417 [INFO] [face_recognition.detector]: Detected 3 face(s) with confidence >= 0.50
+2026-09-21 19:21:57,428 [INFO] [face_recognition.recognition_service]: Matching 3 detected face(s) against 5 enrolled template(s)...
+2026-09-21 19:21:57,442 [INFO] [face_recognition.matcher]: Unknown person rejected: highest similarity score 0.2486 is below threshold 0.5000
+2026-09-21 19:21:57,463 [INFO] [face_recognition.matcher]: Identity match: 'Ritheesh K' (ID: 7) with similarity score 0.6053 >= threshold 0.5000
+2026-09-21 19:21:57,489 [INFO] [face_recognition.matcher]: Unknown person rejected: highest similarity score 0.3134 is below threshold 0.5000
+2026-09-21 19:21:57,516 [INFO] [face_recognition.recognition_service]: Recognition completed in 435.26 ms. Status: KNOWN. Best similarity: 0.6053 (threshold: 0.5000)
+2026-09-21 19:28:58,850 [INFO] [face_recognition.detector]: Initializing FaceDetector with model pack 'buffalo_sc' on CPU...
+2026-09-21 19:28:59,007 [INFO] [face_recognition.detector]: FaceDetector successfully initialized.
+2026-09-21 19:28:59,008 [INFO] [face_recognition.embedder]: FaceEmbedder successfully initialized with ArcFace ONNX model.
+2026-09-21 19:28:59,008 [INFO] [face_recognition.engine]: FaceEngine pipeline fully initialized.
+2026-09-21 19:28:59,757 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.50
+2026-09-21 19:30:01,546 [INFO] [face_recognition.cleanup]: Retention cleanup daemon stopped.
+2026-09-21 19:30:07,934 [INFO] [face_recognition.detector]: Initializing FaceDetector with model pack 'buffalo_sc' on CPU...
+2026-09-21 19:30:08,246 [INFO] [face_recognition.detector]: FaceDetector successfully initialized.
+2026-09-21 19:30:08,332 [INFO] [face_recognition.embedder]: FaceEmbedder successfully initialized with ArcFace ONNX model.
+2026-09-21 19:30:08,384 [INFO] [face_recognition.engine]: FaceEngine pipeline fully initialized.
+2026-09-21 19:30:09,048 [INFO] [face_recognition.cleanup]: Retention cleanup daemon started. Interval: 86400 seconds, Retention: 30 days.
+2026-09-21 19:30:09,049 [INFO] [face_recognition.cleanup]: Retention cleanup daemon thread launched (id=29256).
+2026-09-21 19:30:09,049 [INFO] [face_recognition.cleanup]: Retention cleanup: scanning 'C:\Users\Ritheesh k\Downloads\Face_Recognition_System\Ritheesh\backend\data\thumbnails' for files older than 30 day(s).
+2026-09-21 19:30:09,074 [INFO] [face_recognition.cleanup]: Retention cleanup: finished. Deleted 0 file(s).
+2026-09-21 19:30:23,446 [INFO] [face_recognition.detector]: Initializing FaceDetector with model pack 'buffalo_sc' on CPU...
+2026-09-21 19:30:23,772 [INFO] [face_recognition.detector]: FaceDetector successfully initialized.
+2026-09-21 19:30:23,824 [INFO] [face_recognition.embedder]: FaceEmbedder successfully initialized with ArcFace ONNX model.
+2026-09-21 19:30:23,825 [INFO] [face_recognition.engine]: FaceEngine pipeline fully initialized.
+2026-09-21 19:31:00,202 [INFO] [face_recognition.cleanup]: Retention cleanup daemon stopped.
+2026-09-21 19:31:03,937 [INFO] [face_recognition.detector]: Initializing FaceDetector with model pack 'buffalo_sc' on CPU...
+2026-09-21 19:31:04,106 [INFO] [face_recognition.detector]: FaceDetector successfully initialized.
+2026-09-21 19:31:04,225 [INFO] [face_recognition.embedder]: FaceEmbedder successfully initialized with ArcFace ONNX model.
+2026-09-21 19:31:04,277 [INFO] [face_recognition.engine]: FaceEngine pipeline fully initialized.
+2026-09-21 19:31:04,861 [INFO] [face_recognition.cleanup]: Retention cleanup daemon started. Interval: 86400 seconds, Retention: 30 days.
+2026-09-21 19:31:04,861 [INFO] [face_recognition.cleanup]: Retention cleanup daemon thread launched (id=2120).
+2026-09-21 19:31:04,862 [INFO] [face_recognition.cleanup]: Retention cleanup: scanning 'C:\Users\Ritheesh k\Downloads\Face_Recognition_System\Ritheesh\backend\data\thumbnails' for files older than 30 day(s).
+2026-09-21 19:31:04,874 [INFO] [face_recognition.cleanup]: Retention cleanup: finished. Deleted 0 file(s).
+2026-09-21 19:31:21,816 [INFO] [face_recognition.detector]: Initializing FaceDetector with model pack 'buffalo_sc' on CPU...
+2026-09-21 19:31:21,928 [INFO] [face_recognition.detector]: FaceDetector successfully initialized.
+2026-09-21 19:31:21,958 [INFO] [face_recognition.embedder]: FaceEmbedder successfully initialized with ArcFace ONNX model.
+2026-09-21 19:31:21,958 [INFO] [face_recognition.engine]: FaceEngine pipeline fully initialized.
+2026-09-21 19:31:22,935 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.45
+2026-09-21 19:31:23,013 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.45
+2026-09-21 19:31:23,087 [INFO] [face_recognition.detector]: Detected 1 face(s) with confidence >= 0.45
+2026-09-21 19:32:34,334 [INFO] [face_recognition.cleanup]: Retention cleanup daemon stopped.
+2026-09-21 19:32:38,622 [INFO] [face_recognition.detector]: Initializing FaceDetector with model pack 'buffalo_sc' on CPU...
+2026-09-21 19:32:38,765 [INFO] [face_recognition.detector]: FaceDetector successfully initialized.
+2026-09-21 19:32:38,930 [INFO] [face_recognition.embedder]: FaceEmbedder successfully initialized with ArcFace ONNX model.
+2026-09-21 19:32:39,032 [INFO] [face_recognition.engine]: FaceEngine pipeline fully initialized.
+2026-09-21 19:32:39,679 [INFO] [face_recognition.cleanup]: Retention cleanup daemon started. Interval: 86400 seconds, Retention: 30 days.
+2026-09-21 19:32:39,680 [INFO] [face_recognition.cleanup]: Retention cleanup daemon thread launched (id=16200).
+2026-09-21 19:32:39,680 [INFO] [face_recognition.cleanup]: Retention cleanup: scanning 'C:\Users\Ritheesh k\Downloads\Face_Recognition_System\Ritheesh\backend\data\thumbnails' for files older than 30 day(s).
+2026-09-21 19:32:39,686 [INFO] [face_recognition.cleanup]: Retention cleanup: finished. Deleted 0 file(s).
+2026-09-21 19:39:11,305 [INFO] [face_recognition.cleanup]: Retention cleanup daemon stopped.
