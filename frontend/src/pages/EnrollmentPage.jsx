@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { 
   UserPlus, 
   Upload, 
+  Camera,
   X, 
   Image as ImageIcon, 
   CheckCircle2, 
@@ -21,6 +22,7 @@ import {
   UserX
 } from 'lucide-react';
 import { quickEnroll, verifyEnrollmentPhotos } from '../services/api';
+import EnrollmentWebcam from '../components/EnrollmentWebcam';
 
 export default function EnrollmentPage({ onEnrollmentChange, onNavigate }) {
   const [name, setName] = useState('');
@@ -40,8 +42,22 @@ export default function EnrollmentPage({ onEnrollmentChange, onNavigate }) {
   // Cross-photo identity verification state
   const [verifyingPhotos, setVerifyingPhotos] = useState(false);
   const [verificationResult, setVerificationResult] = useState(null);
+  const [isWebcamOpen, setIsWebcamOpen] = useState(false);
 
   const fileInputRef = useRef(null);
+
+  const handleWebcamPhotoCaptured = (file) => {
+    const updated = [...selectedFiles, file];
+    setSelectedFiles(updated);
+    setPreviews(updated.map(f => URL.createObjectURL(f)));
+    setErrorMsg(null);
+
+    if (updated.length >= 3) {
+      runPhotoVerification(updated);
+    } else {
+      setVerificationResult(null);
+    }
+  };
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -387,16 +403,6 @@ export default function EnrollmentPage({ onEnrollmentChange, onNavigate }) {
                   Selected: <span className={`font-mono font-bold ${selectedFiles.length >= 3 ? 'text-emerald-400' : 'text-amber-400'}`}>{selectedFiles.length} photo(s) (min 3)</span>
                 </p>
               </div>
-
-              <button
-                type="button"
-                id="btn-browse-images"
-                onClick={() => fileInputRef.current?.click()}
-                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-semibold border border-slate-700 transition-all flex items-center gap-1.5"
-              >
-                <Upload className="w-3.5 h-3.5 text-cyan-400" />
-                <span>Add Photos</span>
-              </button>
             </div>
 
             {/* Dropzone Area */}
@@ -404,20 +410,77 @@ export default function EnrollmentPage({ onEnrollmentChange, onNavigate }) {
               id="dropzone-enroll"
               onDragOver={(e) => e.preventDefault()}
               onDrop={handleDrop}
-              onClick={() => fileInputRef.current?.click()}
+              onClick={(e) => {
+                if (e.target.closest('button')) return;
+                fileInputRef.current?.click();
+              }}
               className={`border-2 border-dashed rounded-2xl p-6 text-center cursor-pointer transition-all ${
                 selectedFiles.length === 0
-                  ? 'border-slate-800 hover:border-cyan-500/60 bg-slate-900/40 hover:bg-slate-900/60 min-h-[160px] flex flex-col items-center justify-center'
+                  ? 'border-slate-800 hover:border-cyan-500/60 bg-slate-900/40 hover:bg-slate-900/60 min-h-[190px] flex flex-col items-center justify-center space-y-3'
                   : 'border-slate-800 hover:border-slate-700 bg-slate-900/20 py-4'
               }`}
             >
-              <Upload className="w-8 h-8 text-cyan-400 mx-auto mb-2" />
-              <p className="text-xs font-semibold text-slate-200">
-                Drag & Drop 3 or more face photographs here, or click to browse
-              </p>
-              <p className="text-[11px] text-slate-500 mt-0.5">
-                Supported formats: JPG, PNG, WEBP
-              </p>
+              {selectedFiles.length === 0 ? (
+                <>
+                  <div className="space-y-1">
+                    <p className="text-base font-extrabold text-white">
+                      Upload Your Photos to Enroll
+                    </p>
+                    <p className="text-xs text-slate-400 max-w-sm mx-auto leading-relaxed">
+                      Capture different angles (frontal, slight left, slight right) using your webcam or upload photos from your device.
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap items-center justify-center gap-3 pt-1">
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setIsWebcamOpen(true);
+                      }}
+                      className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-extrabold text-xs shadow-md shadow-cyan-500/20 transition-all cursor-pointer hover:scale-105"
+                    >
+                      <Camera className="w-3.5 h-3.5" />
+                      <span>Capture with Live Webcam</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        fileInputRef.current?.click();
+                      }}
+                      className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-semibold text-xs transition-all cursor-pointer hover:scale-105"
+                    >
+                      <Upload className="w-3.5 h-3.5 text-cyan-400" />
+                      <span>Upload Your Photos</span>
+                    </button>
+                  </div>
+
+                  <p className="text-[11px] text-slate-500 font-mono pt-1">
+                    Supports JPG, PNG, WEBP • Minimum 3 photos required
+                  </p>
+                </>
+              ) : (
+                <div className="flex items-center justify-center gap-5 text-xs text-slate-400 py-1">
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setIsWebcamOpen(true);
+                    }}
+                    className="flex items-center gap-1.5 text-cyan-400 hover:text-cyan-300 font-bold transition-colors cursor-pointer"
+                  >
+                    <Camera className="w-4 h-4" />
+                    <span>Take Another with Webcam</span>
+                  </button>
+                  <span className="text-slate-600 font-mono">•</span>
+                  <div className="flex items-center gap-1.5 text-slate-300 hover:text-white font-semibold cursor-pointer">
+                    <Upload className="w-4 h-4 text-cyan-400" />
+                    <span>Add More Files</span>
+                  </div>
+                </div>
+              )}
             </div>
 
             <input
@@ -844,6 +907,14 @@ export default function EnrollmentPage({ onEnrollmentChange, onNavigate }) {
           </div>
         </div>
       )}
+
+      {/* Multi-Angle Webcam Enrollment Modal */}
+      <EnrollmentWebcam
+        isOpen={isWebcamOpen}
+        onClose={() => setIsWebcamOpen(false)}
+        onPhotoCaptured={handleWebcamPhotoCaptured}
+        existingCount={selectedFiles.length}
+      />
     </div>
   );
 }
